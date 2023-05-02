@@ -21,12 +21,7 @@
     // "sourceType": "module"
   },
   // Указываем плагины, которые добавляют специфичные правила, которые мы можем использовать в "rules".
-  "plugins": [
-    "react",
-    "@next/next",
-    "@typescript-eslint",
-    "simple-import-sort"
-  ],
+  "plugins": ["react", "@next/next", "@typescript-eslint", "simple-import-sort"],
   "rules": {
     // Common rules
 
@@ -65,10 +60,7 @@
     // "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/no-array-index-key": "error",
-    "react/jsx-curly-brace-presence": [
-      "error",
-      { "props": "never", "children": "never" }
-    ],
+    "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
     "react/prop-types": "off",
     "react/no-unused-prop-types": 1,
     "react/no-unused-state": 1,
@@ -115,14 +107,14 @@
     ],
     "@typescript-eslint/naming-convention": [
       "error",
+      // {
+      //   "selector": "variable",
+      //   "modifiers": ["global"],
+      //   "format": ["UPPER_CASE"]
+      // },
       {
         "selector": "variable",
-        "modifiers": ["global"],
-        "format": ["UPPER_CASE"]
-      },
-      {
-        "selector": "variable",
-        "format": ["camelCase"]
+        "format": ["camelCase", "UPPER_CASE"]
       }
     ]
   }
