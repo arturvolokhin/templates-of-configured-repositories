@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { getCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 
 import type { BaseRequestParams } from '@/types/common/BaseRequestParams';
 import type { BaseRequestReturnType } from '@/types/common/BaseRequestReturnType';
@@ -21,15 +21,17 @@ axios.interceptors.response.use(
         data: { errors = null, message = null },
       } = error.response;
       if (typeof window !== 'undefined') {
-        toast.error(message);
+        message && toast.error(message);
+        status === 401 && deleteCookie(AUTH_TOKEN);
       }
+      console.error('Axios response error', error.response);
       return Promise.reject({ status, errors, message });
     } else if (error.request) {
-      console.log('request', error.request);
+      console.error('Axios request error', error.request);
       const { status, statusText } = error.request;
       return Promise.reject({ status, message: statusText });
     } else {
-      console.error('else', error.message);
+      console.error('Axios undefined error', error.message);
       return Promise.reject({ message: error.message });
     }
   }
