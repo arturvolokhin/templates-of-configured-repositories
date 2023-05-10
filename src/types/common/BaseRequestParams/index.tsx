@@ -1,9 +1,8 @@
-import type { RequestHeaders } from '../RequestHeaders';
+import type { AxiosHeaders, AxiosRequestConfig } from 'axios';
 
-export interface BaseRequestParams {
+export type BaseRequestParams = {
   url: string;
-  body?: Record<string, unknown> | FormData;
-  params?: Record<string, unknown>;
-  headers?: RequestHeaders;
-  isFormData?: boolean;
-}
+  data?: Record<string, unknown> | FormData;
+  headers?: AxiosHeaders;
+  params?: AxiosRequestConfig<Record<string, unknown> | FormData>['params'];
+};

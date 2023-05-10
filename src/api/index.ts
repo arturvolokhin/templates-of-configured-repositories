@@ -6,7 +6,6 @@ import { deleteCookie, getCookie } from 'cookies-next';
 
 import type { BaseRequestParams } from '@/types/common/BaseRequestParams';
 import type { BaseRequestReturnType } from '@/types/common/BaseRequestReturnType';
-import { deleteEmptyKeys } from '@/utils/deleteEmptyKeys';
 
 import { AUTH_TOKEN, REQUEST_METHODS } from '../constants';
 
@@ -53,24 +52,14 @@ axios.interceptors.request.use(
 
 const makeBaseRequest =
   (method: REQUEST_METHODS): BaseRequestReturnType =>
-  async ({ url, body, headers, params }: BaseRequestParams) => {
-    const requestBody = body instanceof FormData ? body : deleteEmptyKeys(body as Record<string, unknown>);
-    const requestConfig = { headers: { ...headers }, ...(params ? params : {}) };
-
-    switch (method) {
-      case REQUEST_METHODS.GET:
-        return axios.get(url, requestConfig);
-      case REQUEST_METHODS.POST:
-        return axios.post(url, requestBody, requestConfig);
-      case REQUEST_METHODS.PUT:
-        return axios.put(url, requestBody, requestConfig);
-      case REQUEST_METHODS.PATCH:
-        return axios.patch(url, requestBody, requestConfig);
-      case REQUEST_METHODS.DELETE:
-        return axios.delete(url, requestConfig);
-      default:
-        throw new Error(`Invalid request method ${method}.`);
-    }
+  async ({ url, data, headers, params }: BaseRequestParams) => {
+    return axios({
+      url,
+      method,
+      data,
+      headers,
+      params,
+    });
   };
 
 export const get = makeBaseRequest(REQUEST_METHODS.GET);
