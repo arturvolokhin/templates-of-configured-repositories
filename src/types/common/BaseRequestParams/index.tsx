@@ -1,8 +1,12 @@
-import type { AxiosHeaders, AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
+
+type AxiosDataType = Record<string, unknown> | FormData;
 
 export type BaseRequestParams = {
   url: string;
-  data?: Record<string, unknown> | FormData;
-  headers?: AxiosHeaders;
-  params?: AxiosRequestConfig<Record<string, unknown> | FormData>['params'];
+  data?: AxiosDataType;
+  headers?: RawAxiosRequestHeaders;
+  params?: AxiosRequestConfig<AxiosDataType>['params'];
 };
+
+

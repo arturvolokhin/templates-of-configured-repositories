@@ -52,13 +52,10 @@ axios.interceptors.request.use(
 
 const makeBaseRequest =
   (method: REQUEST_METHODS): BaseRequestReturnType =>
-  async ({ url, data, headers, params }: BaseRequestParams) => {
+  async (config: BaseRequestParams) => {
     return axios({
-      url,
       method,
-      data,
-      headers,
-      params,
+      ...config,
     });
   };
 
