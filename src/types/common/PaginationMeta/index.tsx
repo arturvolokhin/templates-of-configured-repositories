@@ -7,7 +7,7 @@ export interface PaginationMeta {
       url: string | null;
       label: string;
       active: boolean;
-    }
+    },
   ];
   path?: string;
   per_page: number;

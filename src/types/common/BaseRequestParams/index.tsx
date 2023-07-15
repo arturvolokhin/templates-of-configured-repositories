@@ -8,5 +8,3 @@ export type BaseRequestParams = {
   headers?: RawAxiosRequestHeaders;
   params?: AxiosRequestConfig<AxiosDataType>['params'];
 };
-
-

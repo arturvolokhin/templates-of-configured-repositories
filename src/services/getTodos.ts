@@ -8,10 +8,8 @@ import type { TodoType } from '@/types/domain/TodoType';
 
 const getTodosData = async (): Promise<DataResponse<TodoType | CustomError>> => {
   try {
-
     const { data: json } = await get<TodoJson>({ url: TODOS_ENDPOINT });
 
-    
     const data = mapJsonToTodoType(json);
 
     return { ok: true, data };
